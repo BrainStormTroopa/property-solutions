@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { LogIn, UserPlus, Eye, EyeOff, ArrowLeft } from 'lucide-react';
+import { Logo } from './Logo';
 
 interface AuthFormProps {
   onBack?: () => void;
@@ -58,13 +59,9 @@ export const AuthForm: React.FC<AuthFormProps> = ({ onBack }) => {
           )}
           <div className="text-center mb-8">
             <div className="mb-6">
-              <img
-                src="/RPS Logo Final .png"
-                alt="Rubeus Property Solutions"
-                className="h-20 object-contain mx-auto"
-              />
+              <Logo className="h-20 object-contain mx-auto" />
             </div>
-            <p className="text-gray-300">
+            <p className="text-gray-300 text-lg">
               {isForgotPassword ? 'Reset your password' : isSignUp ? 'Create your account' : 'Sign in to continue'}
             </p>
           </div>

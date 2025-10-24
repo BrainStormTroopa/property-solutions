@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAuth } from '../contexts/AuthContext';
-import { LogOut, User, FileText } from 'lucide-react';
+import { LogOut, User } from 'lucide-react';
 
 export const Header: React.FC = () => {
   const { profile, signOut } = useAuth();
@@ -19,21 +19,27 @@ export const Header: React.FC = () => {
     <header className="bg-gradient-to-r from-rps-charcoal to-rps-dark-charcoal shadow-lg">
       <div className="max-w-7xl mx-auto px-6 py-5">
         <div className="flex justify-between items-center">
+          {/* Logo */}
           <div className="flex items-center gap-4">
             <img
-              src="/RPS Logo Final .png"
+              src={`${import.meta.env.BASE_URL}rps-logo-final.png`}
               alt="Rubeus Property Solutions"
               className="h-14 object-contain"
             />
           </div>
 
+          {/* User info */}
           <div className="flex items-center gap-4">
             <div className="text-right">
               <div className="flex items-center gap-2">
                 <User className="w-4 h-4 text-white" />
                 <span className="font-medium text-white">{profile?.full_name}</span>
               </div>
-              <span className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${getRoleBadgeColor(profile?.role || '')}`}>
+              <span
+                className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${getRoleBadgeColor(
+                  profile?.role || ''
+                )}`}
+              >
                 {profile?.role}
               </span>
             </div>

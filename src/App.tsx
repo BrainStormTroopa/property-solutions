@@ -1,18 +1,18 @@
-import { useState } from 'react';
-import { AuthProvider, useAuth } from './contexts/AuthContext';
-import { AuthForm } from './components/AuthForm';
-import { LandingPage } from './components/LandingPage';
-import { PublicClaimForm } from './components/PublicClaimForm';
-import { Header } from './components/Header';
-import { OperativeDashboard } from './components/OperativeDashboard';
-import { SurveyorDashboard } from './components/SurveyorDashboard';
-import { SolicitorDashboard } from './components/SolicitorDashboard';
+import React, { useState } from "react";
+import { AuthProvider, useAuth } from "./contexts/AuthContext";
+import { AuthForm } from "./components/AuthForm";
+import { LandingPage } from "./components/LandingPage";
+import { PublicClaimForm } from "./components/PublicClaimForm";
+import { Header } from "./components/Header";
+import { OperativeDashboard } from "./components/OperativeDashboard";
+import { SurveyorDashboard } from "./components/SurveyorDashboard";
+import { SolicitorDashboard } from "./components/SolicitorDashboard";
 
-type View = 'landing' | 'claim' | 'auth';
+type View = "landing" | "claim" | "auth";
 
 function AppContent() {
   const { user, profile, loading } = useAuth();
-  const [currentView, setCurrentView] = useState<View>('landing');
+  const [currentView, setCurrentView] = useState<View>("landing");
 
   if (loading) {
     return (
@@ -26,16 +26,16 @@ function AppContent() {
   }
 
   if (!user || !profile) {
-    if (currentView === 'auth') {
-      return <AuthForm onBack={() => setCurrentView('landing')} />;
+    if (currentView === "auth") {
+      return <AuthForm onBack={() => setCurrentView("landing")} />;
     }
-    if (currentView === 'claim') {
-      return <PublicClaimForm onBack={() => setCurrentView('landing')} />;
+    if (currentView === "claim") {
+      return <PublicClaimForm onBack={() => setCurrentView("landing")} />;
     }
     return (
       <LandingPage
-        onGetStarted={() => setCurrentView('claim')}
-        onPortalLogin={() => setCurrentView('auth')}
+        onGetStarted={() => setCurrentView("claim")}
+        onPortalLogin={() => setCurrentView("auth")}
       />
     );
   }
@@ -43,19 +43,19 @@ function AppContent() {
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
-      {(profile.role === 'tenant' || profile.role === 'operative') && <OperativeDashboard />}
-      {profile.role === 'surveyor' && <SurveyorDashboard />}
-      {profile.role === 'solicitor' && <SolicitorDashboard />}
+      {(profile.role === "tenant" || profile.role === "operative") && (
+        <OperativeDashboard />
+      )}
+      {profile.role === "surveyor" && <SurveyorDashboard />}
+      {profile.role === "solicitor" && <SolicitorDashboard />}
     </div>
   );
 }
 
-function App() {
+export default function App() {
   return (
     <AuthProvider>
       <AppContent />
     </AuthProvider>
   );
 }
-
-export default App;
